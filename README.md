@@ -29,6 +29,10 @@ This repository contains an interface prototype only. There is no backend, so:
 - Guest mode (name and photo are locked) and account mode (editable first name, last name and photo)
 - Settings and profile are kept between launches; the password is never stored
 
+## Channel files
+
+Channels are added with small `.turbotv` files (one channel each); several channels can be shipped as a `.turbopack` archive. The draft format is described in [docs/turbotv-format.md](docs/turbotv-format.md), with an [example](examples/example-channel.turbotv).
+
 ## Run it
 
 No build step is needed. Open `index.html` in any modern browser.
@@ -48,6 +52,8 @@ To publish it as a website with GitHub Pages: **Settings → Pages → Deploy fr
 | Path | What it is |
 | --- | --- |
 | `index.html` | The whole prototype in one file |
+| `docs/turbotv-format.md` | Draft specification of the `.turbotv` channel format |
+| `examples/example-channel.turbotv` | Example channel file (fictional provider) |
 | `LICENSE` | PolyForm Noncommercial License 1.0.0 |
 | `assets/logo.png` | Logo with transparent background (light-colored, made for dark backgrounds) |
 | `assets/banner.png` | Logo on black, used in this README |
