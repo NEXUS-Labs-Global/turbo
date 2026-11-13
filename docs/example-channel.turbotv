@@ -1,0 +1,29 @@
+{
+  "format": "turbotv",
+  "version": 0,
+  "id": "world-news",
+  "updated": "2026-11-12T12:00:00Z",
+  "provider": {
+    "id": "example-media",
+    "name": "Example Media",
+    "website": "https://example.com",
+    "contact": "support@example.com"
+  },
+  "channel": {
+    "name": "Example World News",
+    "country": "ZZ",
+    "languages": ["en"],
+    "category": "news",
+    "description": "Sample channel for testing the .turbotv format. Not a real broadcast.",
+    "logo": { "url": "https://example.com/logos/world-news.png" }
+  },
+  "source": {
+    "type": "hls",
+    "url": "https://streams.example.com/world-news/index.m3u8"
+  },
+  "license": {
+    "holder": "Example Media",
+    "terms_url": "https://example.com/terms",
+    "regions": ["*"]
+  }
+}
