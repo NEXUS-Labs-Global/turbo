@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>App shell</title>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -127,6 +128,16 @@ body.calm .drop{animation:none}
 .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
 .fld input:disabled{opacity:.5}
 .err.ok{color:var(--light)}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.pill{border:2px solid #6b6b78;border-radius:999px;padding:6px 14px;font-weight:600}
+.pill.ok{border-color:var(--accent)}
+.chc{display:flex;gap:14px;align-items:center;text-align:left;font:inherit;color:#fff;cursor:pointer}
+.chc:hover{border-color:var(--accent)}
+.chn{display:flex;flex-direction:column;gap:2px;min-width:0}
+.chn span{color:var(--muted);font-size:.85em}
+.prev{max-width:560px;margin-bottom:18px}
+.prev div{padding:3px 0}
+#vid{width:100%;max-width:880px;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:12px}
 @media (max-width:700px){.nav.prof{padding:4px;justify-content:center}.pname{display:none}}
 @media (max-width:700px){.sidebar{width:72px}.sidebar .nav{font-size:0}.sidebar .nav::first-letter{font-size:var(--fs)}.main{padding:20px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important;transition-delay:0s!important}}
@@ -203,6 +214,13 @@ body.calm .step.on{animation:none}
           <div class="card"><h3><span data-i="sec" style="color:inherit;font-size:1em"></span> 2</h3><span data-i="empty"></span></div>
           <div class="card"><h3><span data-i="sec" style="color:inherit;font-size:1em"></span> 3</h3><span data-i="empty"></span></div>
         </div>
+        <div id="pHome">
+          <div class="bar"><button class="btn" id="hImp" data-i="imp"></button><input type="file" id="hFile" accept=".turbotv,.turbopack,application/json" hidden><span class="pill" id="hOn"></span></div>
+          <p class="err" id="hMsg" role="alert"></p>
+          <div class="card prev" id="hPrev" hidden><h3 data-i="prev_t"></h3><div id="hPrevBody"></div><div class="rowb" style="margin:14px 0 0"><button class="btn" id="hAdd" data-i="add"></button><button class="btn ghost" id="hCancel" data-i="cancel"></button></div></div>
+          <div id="hList"><div class="card" id="hEmpty" style="margin-bottom:16px"><h3 data-i="empty_t"></h3><span data-i="empty_d"></span><div class="rowb" style="margin:14px 0 0"><button class="btn ghost" id="hEx" data-i="ex"></button></div></div><div class="grid" id="hGrid"></div></div>
+          <div id="hPlay" hidden><div class="rowb"><button class="btn ghost" id="pBack" data-i="back"></button><button class="btn ghost" id="pRm" data-i="rm"></button></div><h2 id="pTit"></h2><p id="pInfo"></p><video id="vid" controls playsinline></video><p class="err" id="vStat"></p></div>
+        </div>
         <div id="pProfile" hidden>
           <div class="pitem pcard"><span class="av big" id="avBig" aria-hidden="true"></span><div><h3 id="pName"></h3><span class="pmeta" id="pMeta"></span></div></div>
           <p class="pitem pnote" id="pNote" data-i="p_note"></p>
@@ -242,8 +260,8 @@ on:"Включено",off:"Выключено",
 a_purple:"Фиолетовый",a_blue:"Синий",a_orange:"Оранжевый",a_red:"Красный",a_green:"Зелёный",
 s1:"Обычный",s2:"Крупный",s3:"Очень крупный",
 back:"Назад",next:"Далее",open:"Открыть",
-nav_home:"Главная",nav_projects:"Проекты",nav_files:"Файлы",nav_settings:"Настройки",
-home_d:"Здесь появится содержимое приложения.",settings_d:"Все параметры можно менять в любой момент.",
+nav_home:"Главная",nav_projects:"Магазин",nav_files:"Загрузки",nav_settings:"Настройки",
+home_d:"Ваши каналы в одном спокойном месте.",settings_d:"Все параметры можно менять в любой момент.",
 sec:"Раздел",empty:"Пустое место для контента",
 sum_lang:"Язык",sum_acc:"Цвет",sum_size:"Текст",sum_bg:"Плывущий фон",sum_motion:"Переходы",
 st_acct:"Аккаунт",st_acct_d:"Войдите или создайте аккаунт, чтобы сохранять настройки и менять профиль. Или продолжите как гость.",
@@ -253,7 +271,7 @@ do_up:"Создать аккаунт",do_in:"Войти",skip:"Продолжи�
 e_email:"Введите корректный адрес почты, например name@example.com.",
 e_user:"Имя пользователя: от 3 до 20 символов, только буквы, цифры, точка и подчёркивание.",
 e_pass:"Пароль должен содержать не менее 8 символов.",
-sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения"},
+sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. В этом онлайн-просмотре внешние соединения заблокированы, в приложении для компьютера она заиграет."},
 en:{w_title:"Welcome",w_text:"Let’s set things up in a minute. Press “Start” to begin.",
 st_lang:"Language",st_lang_d:"Choose the interface language. You can change it later in Settings.",
 st_acc:"Accent color",st_acc_d:"This color highlights selected items and the background.",
@@ -265,8 +283,8 @@ on:"On",off:"Off",
 a_purple:"Purple",a_blue:"Blue",a_orange:"Orange",a_red:"Red",a_green:"Green",
 s1:"Regular",s2:"Large",s3:"Extra large",
 back:"Back",next:"Next",open:"Open",
-nav_home:"Home",nav_projects:"Projects",nav_files:"Files",nav_settings:"Settings",
-home_d:"The app content will appear here.",settings_d:"You can change any option at any time.",
+nav_home:"Home",nav_projects:"Store",nav_files:"Downloads",nav_settings:"Settings",
+home_d:"Your channels, in one calm place.",settings_d:"You can change any option at any time.",
 sec:"Section",empty:"Empty space for content",
 sum_lang:"Language",sum_acc:"Color",sum_size:"Text",sum_bg:"Drifting background",sum_motion:"Transitions",
 st_acct:"Account",st_acct_d:"Sign in or create an account to keep your settings and customize your profile. Or continue as a guest.",
@@ -276,7 +294,7 @@ do_up:"Create account",do_in:"Sign in",skip:"Continue as a guest",
 e_email:"Enter a valid email address, for example name@example.com.",
 e_user:"Username: 3 to 20 characters, letters, numbers, dots and underscores only.",
 e_pass:"Password must be at least 8 characters.",
-sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm"}
+sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. This online preview blocks outside connections; the desktop app will play it."}
 };
 var ACC={
 purple:{a:"#8b5cf6",r:"139,92,246",l:"#c4b0ff",d:"#3b1b8f"},
@@ -327,9 +345,10 @@ function renderText(){
   next.textContent=cur===steps.length-1?t("open"):t("next");
   $("#err").textContent=errKey?t(errKey):"";
   renderProfile();
+  renderHome();
   $("#pTitle").textContent=t("nav_"+page);
   $("#pDesc").textContent=page==="settings"?t("settings_d"):page==="profile"?t("prof_d"):t("home_d");
-  $("#pGrid").hidden=page==="settings"||page==="profile";$("#pSettings").hidden=page!=="settings";$("#pProfile").hidden=page!=="profile";$("#pReset").hidden=page!=="settings";
+  $("#pGrid").hidden=page!=="projects"&&page!=="files";$("#pHome").hidden=page!=="home";$("#pSettings").hidden=page!=="settings";$("#pProfile").hidden=page!=="profile";$("#pReset").hidden=page!=="settings";
   var sz={"16px":"s1","18px":"s2","22px":"s3"}[P.size];
   $("#summary").innerHTML=
    "<div>"+t("sum_acct")+": <b>"+esc(dispName())+"</b></div>"+
@@ -367,7 +386,7 @@ $$(".nav").forEach(function(n){n.addEventListener("click",function(){
   n.setAttribute("aria-current","page");renderText();
 })});
 function placeInd(){var b=$('.nav[aria-current="page"]'),i=$("#ind");if(b&&i){i.style.height=b.offsetHeight+"px";i.style.transform="translateY("+b.offsetTop+"px)"}}
-function contentEls(){return [$("#pTitle"),$("#pDesc")].concat(page==="settings"?$$("#pSettings .sgroup"):page==="profile"?$$("#pProfile .pitem"):$$("#pGrid .card"))}
+function contentEls(){return [$("#pTitle"),$("#pDesc")].concat(page==="settings"?$$("#pSettings .sgroup"):page==="profile"?$$("#pProfile .pitem"):page==="home"?$$("#pHome .card"):$$("#pGrid .card"))}
 function dropIn(l){l.forEach(function(e,i){e.classList.remove("drop");void e.offsetWidth;e.style.animationDelay=(i*70)+"ms";e.classList.add("drop")})}
 $$(".nav").forEach(function(n){n.addEventListener("click",function(){
   n.classList.remove("press");void n.offsetWidth;n.classList.add("press");
@@ -442,12 +461,90 @@ function load(){try{
   if(u.signed===true)U={signed:true,first:String(u.first||"").slice(0,40),last:String(u.last||"").slice(0,40),avatar:/^data:image\//.test(u.avatar||"")?u.avatar:"",via:String(u.via||"email").slice(0,20)};
   done=d.done===true;
 }catch(e){}}
+/* Channels (.turbotv v0, see docs/turbotv-format.md) */
+var CH=[],playing=null,hls=null,pend=null,mk="",mx="",CKEY=KEY+":ch",ID=/^[a-z0-9][a-z0-9.-]{0,63}$/;
+var CATS=["news","sports","movies","series","music","kids","documentary","culture","education","general","other"];
+var EX={format:"turbotv",version:0,id:"world-news",updated:"2026-11-12T12:00:00Z",provider:{id:"example-media",name:"Example Media",website:"https://example.com",contact:"support@example.com"},channel:{name:"Example World News",country:"ZZ",languages:["en"],category:"news",description:"Sample channel for testing the .turbotv format. Not a real broadcast."},source:{type:"hls",url:"https://streams.example.com/world-news/index.m3u8"},license:{holder:"Example Media",terms_url:"https://example.com/terms",regions:["*"]}};
+function https(u){return typeof u==="string"&&u.length<2048&&/^https:\/\/[^\s]+$/i.test(u)}
+function str(s,a,b){return typeof s==="string"&&s.length>=a&&s.length<=b}
+function check(d){
+  if(!d||typeof d!=="object"||Array.isArray(d))return"object";
+  if(d.format!=="turbotv")return"format";
+  if(!Number.isInteger(d.version))return"version";
+  if(d.version>0)return"version "+d.version+", update the app";
+  if(!ID.test(d.id||""))return"id";
+  if(typeof d.updated!=="string"||isNaN(Date.parse(d.updated)))return"updated";
+  var p=d.provider,c=d.channel,s=d.source,l=d.license;
+  if(!p||!ID.test(p.id||"")||!str(p.name,1,80)||!https(p.website))return"provider";
+  if(!c||!str(c.name,1,80)||!/^[A-Z]{2}$/.test(c.country||"")||!Array.isArray(c.languages)||c.languages.length<1||c.languages.length>5||!c.languages.every(function(x){return typeof x==="string"&&/^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(x)})||CATS.indexOf(c.category)<0)return"channel";
+  if(c.description!=null&&!str(c.description,0,300))return"channel.description";
+  if(c.logo!=null&&!(c.logo&&https(c.logo.url)))return"channel.logo";
+  if(!s||s.type!=="hls"||!https(s.url))return"source";
+  if(!l||!str(l.holder,1,200)||!https(l.terms_url)||!Array.isArray(l.regions)||!l.regions.length)return"license";
+  if(d.update_url!=null&&!https(d.update_url))return"update_url";
+  return""}
+function key(d){return d.provider.id+"/"+d.id}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function host(u){try{return new URL(u).host}catch(e){return u}}
+function saveCh(){try{localStorage.setItem(CKEY,JSON.stringify(CH))}catch(e){}}
+function loadCh(){try{CH=(JSON.parse(localStorage.getItem(CKEY)||"[]")||[]).filter(function(d){return !check(d)})}catch(e){CH=[]}}
+function say(k,x){mk=k;mx=x||"";renderHome()}
+function offer(txt){var d;try{d=JSON.parse(txt)}catch(e){return say("e_json")}var e=check(d);if(e)return say("e_bad",e);pend=d;mk="";renderHome();$("#hAdd").focus()}
+function stop(){if(hls){hls.destroy();hls=null}var v=$("#vid");v.pause();v.removeAttribute("src");v.load()}
+function start(c){
+  var v=$("#vid"),st=$("#vStat"),u=c.source.url;stop();st.textContent="";
+  if(!navigator.onLine){st.textContent=t("v_off");return}
+  v.onerror=function(){st.textContent=t("v_err")};
+  if(v.canPlayType("application/vnd.apple.mpegurl"))v.src=u;
+  else if(window.Hls&&Hls.isSupported()){hls=new Hls();hls.on(Hls.Events.ERROR,function(e,x){if(x.fatal)st.textContent=t("v_err")});hls.loadSource(u);hls.attachMedia(v)}
+  else st.textContent=t("v_err");
+}
+function renderHome(){
+  var on=navigator.onLine,cur=null;
+  $("#hOn").textContent=t(on?"on_l":"off_l");$("#hOn").className="pill"+(on?" ok":"");
+  $("#hMsg").textContent=mk?t(mk)+(mx?" ("+mx+")":""):"";
+  CH.forEach(function(d){if(key(d)===playing)cur=d});
+  if(playing&&!cur)playing=null;
+  $("#hList").hidden=!!cur;$("#hPlay").hidden=!cur;$("#hEmpty").hidden=CH.length>0;
+  if(page!=="home"){var v=$("#vid");if(v&&!v.paused)v.pause()}
+  var pv=$("#hPrev");pv.hidden=!pend;
+  if(pend){var b=$("#hPrevBody"),c=pend.channel;b.innerHTML="";
+    [["l_prov",pend.provider.name+" ("+host(pend.provider.website)+")"],["l_chan",c.name+", "+c.country+", "+c.languages.join(" ")+", "+c.category],["l_src","HLS, "+host(pend.source.url)],["l_lic",pend.license.holder+", "+pend.license.regions.join(" ")],["l_sig",t("unv")]].forEach(function(r){b.appendChild(el("div","",t(r[0])+": "+r[1]))})}
+  var g=$("#hGrid");g.innerHTML="";
+  CH.forEach(function(d){
+    var b=el("button","card chc"),w=el("span","chn");
+    b.appendChild(el("span","av",d.channel.name.charAt(0).toUpperCase()));
+    w.appendChild(el("b","",d.channel.name));
+    w.appendChild(el("span","",d.channel.country+" \u00b7 "+d.channel.languages.join(" ")+" \u00b7 "+d.channel.category));
+    w.appendChild(el("span","",d.provider.name));
+    b.appendChild(w);b.onclick=function(){playing=key(d);renderHome();start(d)};g.appendChild(b)});
+  if(cur){$("#pTit").textContent=cur.channel.name;$("#pInfo").textContent=cur.provider.name+", "+cur.license.holder}
+}
+$("#hImp").addEventListener("click",function(){$("#hFile").click()});
+$("#hFile").addEventListener("change",function(){
+  var inp=this,f=inp.files&&inp.files[0];inp.value="";if(!f)return;
+  if(/\.turbopack$/i.test(f.name))return say("e_pack");
+  if(f.size>65536)return say("e_size");
+  var r=new FileReader();r.onload=function(){offer(r.result)};r.readAsText(f);
+});
+$("#hEx").addEventListener("click",function(){offer(JSON.stringify(EX))});
+$("#hCancel").addEventListener("click",function(){pend=null;renderHome()});
+$("#hAdd").addEventListener("click",function(){
+  if(!pend)return;
+  var i=-1;CH.forEach(function(d,n){if(key(d)===key(pend))i=n});
+  if(i<0)CH.push(pend);else if(Date.parse(pend.updated)>=Date.parse(CH[i].updated))CH[i]=pend;
+  pend=null;saveCh();renderHome();
+});
+$("#pBack").addEventListener("click",function(){stop();playing=null;renderHome()});
+$("#pRm").addEventListener("click",function(){CH=CH.filter(function(d){return key(d)!==playing});stop();playing=null;saveCh();renderHome()});
+window.addEventListener("online",renderHome);window.addEventListener("offline",renderHome);
+loadCh();
 var rt;
 $("#reset").addEventListener("click",function(){
   var b=this;
   if(!b.getAttribute("data-c")){b.setAttribute("data-c","1");b.setAttribute("data-i","reset_c");renderText();rt=setTimeout(function(){b.removeAttribute("data-c");b.setAttribute("data-i","reset");renderText()},4000);return}
   clearTimeout(rt);b.removeAttribute("data-c");b.setAttribute("data-i","reset");
-  try{localStorage.removeItem(KEY)}catch(e){}
+  try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+":ch")}catch(e){}CH=[];playing=null;pend=null;
   P={lang:"en",accent:"purple",size:"18px",bg:"on",motion:"on"};
   U={signed:false,first:"",last:"",avatar:"",via:""};done=false;cur=0;errKey="";msgKey="";back2home=false;
   ["#fEmail","#fUser","#fPass"].forEach(function(s){$(s).value=""});

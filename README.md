@@ -20,6 +20,8 @@ This repository contains an interface prototype only. There is no backend, so:
 ## Features
 
 - Welcome screen, then a setup menu, then the Homepage, with smooth transitions
+- Homepage with a channel list, a player screen and an online / offline indicator
+- Import of `.turbotv` channel files, checked against the [draft format](docs/turbotv-format.md) before anything is added
 - Black theme with white buttons and a colored accent
 - Languages: English (default) and Russian
 - Accent colors: purple, blue, orange, red, green
