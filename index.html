@@ -137,6 +137,15 @@ body.calm .drop{animation:none}
 .chn span{color:var(--muted);font-size:.85em}
 .prev{max-width:560px;margin-bottom:18px}
 .prev div{padding:3px 0}
+.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:880px;margin-top:12px}
+.ctl input[type=range]{accent-color:var(--accent);min-height:44px}
+#cSeek{flex:1;min-width:160px}
+#cVol{width:110px}
+.ctl .btn{padding:10px 18px;min-height:48px}
+#cLag:empty{display:none!important}
+.pl:fullscreen{background:#000;display:flex;flex-direction:column;justify-content:center;padding:12px}
+.pl:fullscreen #vid{width:100%;max-width:none;aspect-ratio:auto;flex:1;min-height:0;border:0;border-radius:0}
+.pl:fullscreen .ctl{max-width:none}
 #vid{width:100%;max-width:880px;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:12px}
 @media (max-width:700px){.nav.prof{padding:4px;justify-content:center}.pname{display:none}}
 @media (max-width:700px){.sidebar{width:72px}.sidebar .nav{font-size:0}.sidebar .nav::first-letter{font-size:var(--fs)}.main{padding:20px}}
@@ -219,7 +228,7 @@ body.calm .step.on{animation:none}
           <p class="err" id="hMsg" role="alert"></p>
           <div class="card prev" id="hPrev" hidden><h3 data-i="prev_t"></h3><div id="hPrevBody"></div><div class="rowb" style="margin:14px 0 0"><button class="btn" id="hAdd" data-i="add"></button><button class="btn ghost" id="hCancel" data-i="cancel"></button></div></div>
           <div id="hList"><div class="card" id="hEmpty" style="margin-bottom:16px"><h3 data-i="empty_t"></h3><span data-i="empty_d"></span><div class="rowb" style="margin:14px 0 0"><button class="btn ghost" id="hEx" data-i="ex"></button></div></div><div class="grid" id="hGrid"></div></div>
-          <div id="hPlay" hidden><div class="rowb"><button class="btn ghost" id="pBack" data-i="back"></button><button class="btn ghost" id="pRm" data-i="rm"></button></div><h2 id="pTit"></h2><p id="pInfo"></p><video id="vid" controls playsinline></video><p class="err" id="vStat"></p></div>
+          <div id="hPlay" hidden><div class="rowb"><button class="btn ghost" id="pBack" data-i="back"></button><button class="btn ghost" id="pRm" data-i="rm"></button></div><h2 id="pTit"></h2><p id="pInfo"></p><div class="pl"><video id="vid" playsinline></video><div class="ctl"><button class="btn" id="cPlay"></button><input type="range" id="cSeek" min="0" max="1000" value="1000"><button class="btn ghost" id="cLive" data-i="c_live"></button><input type="range" id="cVol" min="0" max="1" step="0.05" value="1"><button class="btn ghost" id="cFs" data-i="c_fs"></button></div><div class="pill" id="cLag" style="margin-top:10px;display:inline-block"></div></div><p class="err" id="vStat"></p></div>
         </div>
         <div id="pProfile" hidden>
           <div class="pitem pcard"><span class="av big" id="avBig" aria-hidden="true"></span><div><h3 id="pName"></h3><span class="pmeta" id="pMeta"></span></div></div>
@@ -271,7 +280,7 @@ do_up:"Создать аккаунт",do_in:"Войти",skip:"Продолжи�
 e_email:"Введите корректный адрес почты, например name@example.com.",
 e_user:"Имя пользователя: от 3 до 20 символов, только буквы, цифры, точка и подчёркивание.",
 e_pass:"Пароль должен содержать не менее 8 символов.",
-sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. Возможно, она не работает, заблокирована в вашем регионе или ограничена поставщиком. В онлайн-просмотре внешние соединения заблокированы всегда."},
+sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. Возможно, она не работает, заблокирована в вашем регионе или ограничена поставщиком. В онлайн-просмотре внешние соединения заблокированы всегда.",c_play:"Играть",c_pause:"Пауза",c_live:"В эфир",c_fs:"На весь экран",c_seek:"Перемотка",c_vol:"Громкость",c_lag:"Отставание",c_win:"окно перемотки",c_none:"Для этого потока перемотка недоступна"},
 en:{w_title:"Welcome",w_text:"Let’s set things up in a minute. Press “Start” to begin.",
 st_lang:"Language",st_lang_d:"Choose the interface language. You can change it later in Settings.",
 st_acc:"Accent color",st_acc_d:"This color highlights selected items and the background.",
@@ -294,7 +303,7 @@ do_up:"Create account",do_in:"Sign in",skip:"Continue as a guest",
 e_email:"Enter a valid email address, for example name@example.com.",
 e_user:"Username: 3 to 20 characters, letters, numbers, dots and underscores only.",
 e_pass:"Password must be at least 8 characters.",
-sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. It may be offline, blocked in your region or restricted by the provider. In the online preview, outside connections are always blocked."}
+sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. It may be offline, blocked in your region or restricted by the provider. In the online preview, outside connections are always blocked.",c_play:"Play",c_pause:"Pause",c_live:"Live",c_fs:"Full screen",c_seek:"Rewind",c_vol:"Volume",c_lag:"Behind live",c_win:"rewind window",c_none:"Rewind is not available for this stream"}
 };
 var ACC={
 purple:{a:"#8b5cf6",r:"139,92,246",l:"#c4b0ff",d:"#3b1b8f"},
@@ -495,13 +504,13 @@ function start(c){
   var v=$("#vid"),st=$("#vStat"),u=c.source.url;stop();st.textContent="";
   if(!navigator.onLine){st.textContent=t("v_off");return}
   v.onerror=function(){st.textContent=t("v_err")};
-  if(v.canPlayType("application/vnd.apple.mpegurl"))v.src=u;
-  else if(window.Hls&&Hls.isSupported()){hls=new Hls();hls.on(Hls.Events.ERROR,function(e,x){if(x.fatal)st.textContent=t("v_err")});hls.loadSource(u);hls.attachMedia(v)}
+  if(window.Hls&&Hls.isSupported()){hls=new Hls({maxLiveSyncPlaybackRate:1.05,backBufferLength:60});hls.on(Hls.Events.ERROR,function(e,x){if(x.fatal)st.textContent=t("v_err")});hls.loadSource(u);hls.attachMedia(v)}
+  else if(v.canPlayType("application/vnd.apple.mpegurl"))v.src=u;
   else st.textContent=t("v_err");
 }
 function renderHome(){
   var on=navigator.onLine,cur=null;
-  $("#hOn").textContent=t(on?"on_l":"off_l");$("#hOn").className="pill"+(on?" ok":"");
+  $("#cSeek").setAttribute("aria-label",t("c_seek"));$("#cVol").setAttribute("aria-label",t("c_vol"));$("#hOn").textContent=t(on?"on_l":"off_l");$("#hOn").className="pill"+(on?" ok":"");
   $("#hMsg").textContent=mk?t(mk)+(mx?" ("+mx+")":""):"";
   CH.forEach(function(d){if(key(d)===playing)cur=d});
   if(playing&&!cur)playing=null;
@@ -537,6 +546,22 @@ $("#hAdd").addEventListener("click",function(){
 });
 $("#pBack").addEventListener("click",function(){stop();playing=null;renderHome()});
 $("#pRm").addEventListener("click",function(){CH=CH.filter(function(d){return key(d)!==playing});stop();playing=null;saveCh();renderHome()});
+var drag=false;
+function rng(){var s=$("#vid").seekable;if(!s||!s.length)return null;var a=s.start(0),b=s.end(s.length-1);return{a:a,b:b,w:b-a}}
+function ctl(){
+  var v=$("#vid"),r=rng(),sk=$("#cSeek");
+  $("#cPlay").textContent=t(v.paused?"c_play":"c_pause");
+  if(r&&r.w>=3){sk.disabled=false;if(!drag)sk.value=Math.round((v.currentTime-r.a)/r.w*1000);$("#cLag").textContent=t("c_lag")+" "+Math.max(0,Math.round(r.b-v.currentTime))+" s, "+t("c_win")+" "+Math.round(r.w)+" s"}
+  else{sk.disabled=true;sk.value=1000;$("#cLag").textContent=playing?t("c_none"):""}
+}
+$("#cPlay").onclick=function(){var v=$("#vid");if(v.paused)v.play().catch(function(){});else v.pause();ctl()};
+$("#vid").onclick=function(){$("#cPlay").click()};
+$("#cSeek").oninput=function(){drag=true;var r=rng();if(r)$("#vid").currentTime=r.a+this.value/1000*r.w};
+$("#cSeek").onchange=function(){drag=false};
+$("#cLive").onclick=function(){var v=$("#vid"),r=rng();if(!r)return;v.currentTime=(hls&&hls.liveSyncPosition)?hls.liveSyncPosition:r.b;v.play().catch(function(){})};
+$("#cVol").oninput=function(){$("#vid").volume=+this.value};
+$("#cFs").onclick=function(){var p=$("#vid").parentNode;if(document.fullscreenElement)document.exitFullscreen();else if(p.requestFullscreen)p.requestFullscreen()};
+setInterval(ctl,500);
 window.addEventListener("online",renderHome);window.addEventListener("offline",renderHome);
 loadCh();
 var rt;
