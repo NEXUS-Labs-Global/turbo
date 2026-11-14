@@ -35,6 +35,10 @@ This repository contains an interface prototype only. There is no backend, so:
 
 Channels are added with small `.turbotv` files (one channel each); several channels can be shipped as a `.turbopack` archive. The draft format is described in [docs/turbotv-format.md](docs/turbotv-format.md), with an [example](examples/example-channel.turbotv).
 
+## Desktop app
+
+A desktop app for Windows and Linux is built with Tauri; see [docs/building.md](docs/building.md) for the automatic build on GitHub.
+
 ## Run it
 
 No build step is needed. Open `index.html` in any modern browser.

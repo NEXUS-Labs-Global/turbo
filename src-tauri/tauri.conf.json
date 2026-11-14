@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "TURBO",
+  "version": "0.1.0",
+  "identifier": "dev.turbo.player",
+  "build": {
+    "beforeBuildCommand": "node scripts/prepare.mjs",
+    "frontendDist": "../src"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "TURBO",
+        "width": 1100,
+        "height": 760,
+        "minWidth": 700,
+        "minHeight": 560
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "deb", "appimage"],
+    "category": "Video",
+    "shortDescription": "Calm TV viewing",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}
