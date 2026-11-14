@@ -33,7 +33,7 @@ This repository contains an interface prototype only. There is no backend, so:
 
 ## Channel files
 
-Channels are added with small `.turbotv` files (one channel each); several channels can be shipped as a `.turbopack` archive. The draft format is described in [docs/turbotv-format.md](docs/turbotv-format.md), with an [example](examples/example-channel.turbotv).
+Channels are added with small `.turbotv` files (one channel each); several channels can be shipped as a `.turbopack` archive. The draft format is described in [docs/turbotv-format.md](docs/turbotv-format.md), with an [example](examples/example-channel.turbotv). To add your own channel, copy the [template](examples/template.turbotv) and follow [docs/creating-a-channel.md](docs/creating-a-channel.md).
 
 ## Desktop app
 
@@ -60,6 +60,8 @@ To publish it as a website with GitHub Pages: **Settings → Pages → Deploy fr
 | `index.html` | The whole prototype in one file |
 | `docs/turbotv-format.md` | Draft specification of the `.turbotv` channel format |
 | `examples/example-channel.turbotv` | Example channel file (fictional provider) |
+| `docs/creating-a-channel.md` | How to make your own `.turbotv` channel file |
+| `examples/template.turbotv` | Blank template for a new channel |
 | `LICENSE` | PolyForm Noncommercial License 1.0.0 |
 | `assets/logo.png` | Logo with transparent background (light-colored, made for dark backgrounds) |
 | `assets/banner.png` | Logo on black, used in this README |

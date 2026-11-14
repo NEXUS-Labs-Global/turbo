@@ -1,0 +1,29 @@
+{
+  "format": "turbotv",
+  "version": 0,
+  "id": "my-channel",
+  "updated": "2026-11-14T00:00:00Z",
+  "provider": {
+    "id": "my-provider",
+    "name": "REPLACE: provider name",
+    "website": "https://example.com",
+    "contact": "contact@example.com"
+  },
+  "channel": {
+    "name": "REPLACE: channel name",
+    "country": "ZZ",
+    "languages": ["en"],
+    "category": "other",
+    "description": "REPLACE: one short sentence about the channel."
+  },
+  "source": {
+    "type": "hls",
+    "url": "https://example.com/replace-with-the-official-stream/index.m3u8"
+  },
+  "license": {
+    "holder": "REPLACE: who owns or licenses the stream",
+    "terms_url": "https://example.com/terms",
+    "regions": ["*"],
+    "note": "REPLACE or delete: for example, whether this is an official file or made by a fan."
+  }
+}
