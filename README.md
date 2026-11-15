@@ -63,8 +63,9 @@ To publish it as a website with GitHub Pages: **Settings → Pages → Deploy fr
 | `docs/creating-a-channel.md` | How to make your own `.turbotv` channel file |
 | `examples/template.turbotv` | Blank template for a new channel |
 | `LICENSE` | PolyForm Noncommercial License 1.0.0 |
-| `assets/logo.png` | Logo with transparent background (light-colored, made for dark backgrounds) |
-| `assets/banner.png` | Logo on black, used in this README |
+| `assets/logo.png` | TURBO pixel wordmark, light letters on a transparent background |
+| `assets/symbol.svg`, `assets/symbol.png` | The TURBO symbol (octagon with a forward arrow) |
+| `assets/banner.png` | Symbol and wordmark on black, used in this README |
 
 ## License
 
