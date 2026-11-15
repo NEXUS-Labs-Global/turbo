@@ -19,11 +19,16 @@
     ],
     "security": {
       "csp": null
-    }
+    },
+    "withGlobalTauri": true
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis", "deb", "appimage"],
+    "targets": [
+      "nsis",
+      "deb",
+      "appimage"
+    ],
     "category": "Video",
     "shortDescription": "Calm TV viewing",
     "icon": [

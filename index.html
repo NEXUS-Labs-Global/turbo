@@ -140,6 +140,9 @@ body.calm .drop{animation:none}
 .chn span{color:var(--muted);font-size:.85em}
 .prev{max-width:560px;margin-bottom:18px}
 .prev div{padding:3px 0}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);margin-left:8px;border:2px solid #fff;vertical-align:middle}
+#uNotes{white-space:pre-wrap;max-height:220px;overflow:auto;color:var(--muted);margin:6px 0 14px;font:inherit}
+button.pill{font:inherit;color:#fff;background:transparent;cursor:pointer;border-color:var(--accent)}
 .ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:880px;margin-top:12px}
 .ctl input[type=range]{accent-color:var(--accent);min-height:44px}
 #cSeek{flex:1;min-width:160px}
@@ -216,6 +219,7 @@ body.calm .step.on{animation:none}
         <button class="nav" data-page="projects" data-i="nav_projects"></button>
         <button class="nav" data-page="files" data-i="nav_files"></button>
         <button class="nav" data-page="settings" data-i="nav_settings"></button>
+        <button class="nav" data-page="about"><span data-i="nav_about"></span><i class="dot" id="aboutDot" hidden></i></button>
         <button class="nav prof" id="profBtn" data-page="profile"><span class="av" id="avS" aria-hidden="true"></span><span class="pname" id="nameS"></span></button>
       </nav>
       <main class="main">
@@ -227,11 +231,16 @@ body.calm .step.on{animation:none}
           <div class="card"><h3><span data-i="sec" style="color:inherit;font-size:1em"></span> 3</h3><span data-i="empty"></span></div>
         </div>
         <div id="pHome">
-          <div class="bar"><button class="btn" id="hImp" data-i="imp"></button><input type="file" id="hFile" accept=".turbotv,.turbopack,application/json" hidden><span class="pill" id="hOn"></span></div>
+          <div class="bar"><button class="btn" id="hImp" data-i="imp"></button><input type="file" id="hFile" accept=".turbotv,.turbopack,application/json" hidden><span class="pill" id="hOn"></span><button class="pill" id="hUpdBtn" hidden></button></div>
           <p class="err" id="hMsg" role="alert"></p>
           <div class="card prev" id="hPrev" hidden><h3 data-i="prev_t"></h3><div id="hPrevBody"></div><div class="rowb" style="margin:14px 0 0"><button class="btn" id="hAdd" data-i="add"></button><button class="btn ghost" id="hCancel" data-i="cancel"></button></div></div>
           <div id="hList"><div class="card" id="hEmpty" style="margin-bottom:16px"><h3 data-i="empty_t"></h3><span data-i="empty_d"></span><div class="rowb" style="margin:14px 0 0"><button class="btn ghost" id="hEx" data-i="ex"></button></div></div><div class="grid" id="hGrid"></div></div>
           <div id="hPlay" hidden><div class="rowb"><button class="btn ghost" id="pBack" data-i="back"></button><button class="btn ghost" id="pRm" data-i="rm"></button></div><h2 id="pTit"></h2><p id="pInfo"></p><div class="pl"><video id="vid" playsinline></video><div class="ctl"><button class="btn" id="cPlay"></button><input type="range" id="cSeek" min="0" max="1000" value="1000"><button class="btn ghost" id="cLive" data-i="c_live"></button><input type="range" id="cVol" min="0" max="1" step="0.05" value="1"><button class="btn ghost" id="cFs" data-i="c_fs"></button></div><div class="pill" id="cLag" style="margin-top:10px;display:inline-block"></div></div><p class="err" id="vStat"></p></div>
+        </div>
+        <div id="pAbout" hidden>
+          <div class="card" style="max-width:560px;margin-bottom:18px"><h3 id="uVer"></h3><p id="uStat" role="status" style="margin:0 0 12px"></p><h3 id="uNotesH" data-i="u_notes" hidden></h3><pre id="uNotes"></pre><div class="rowb" style="margin:0"><button class="btn" id="uCheck" data-i="u_check"></button><button class="btn" id="uGet" data-i="u_get" hidden></button></div></div>
+          <div class="sgroup"><h3 data-i="g_upd"></h3><div class="grp" data-g="upd"></div></div>
+          <div class="card" style="max-width:560px"><p data-i="u_cred" style="margin:0 0 12px"></p><button class="btn ghost" id="uRepo" data-i="u_repo"></button></div>
         </div>
         <div id="pProfile" hidden>
           <div class="pitem pcard"><span class="av big" id="avBig" aria-hidden="true"></span><div><h3 id="pName"></h3><span class="pmeta" id="pMeta"></span></div></div>
@@ -283,7 +292,7 @@ do_up:"Создать аккаунт",do_in:"Войти",skip:"Продолжи�
 e_email:"Введите корректный адрес почты, например name@example.com.",
 e_user:"Имя пользователя: от 3 до 20 символов, только буквы, цифры, точка и подчёркивание.",
 e_pass:"Пароль должен содержать не менее 8 символов.",
-sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. Возможно, она не работает, заблокирована в вашем регионе или ограничена поставщиком. В онлайн-просмотре внешние соединения заблокированы всегда.",c_play:"Играть",c_pause:"Пауза",c_live:"В эфир",c_fs:"На весь экран",c_seek:"Перемотка",c_vol:"Громкость",c_lag:"Отставание",c_win:"окно перемотки",c_none:"Для этого потока перемотка недоступна"},
+sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. Возможно, она не работает, заблокирована в вашем регионе или ограничена поставщиком. В онлайн-просмотре внешние соединения заблокированы всегда.",c_play:"Играть",c_pause:"Пауза",c_live:"В эфир",c_fs:"На весь экран",c_seek:"Перемотка",c_vol:"Громкость",c_lag:"Отставание",c_win:"окно перемотки",c_none:"Для этого потока перемотка недоступна",nav_about:"О программе",about_d:"Версия, обновления и сведения о проекте.",g_upd:"Проверять обновления при запуске",u_ver:"Версия",u_idle:"Нажмите кнопку, чтобы проверить обновления.",u_chk:"Проверяю…",u_none:"У вас последняя версия.",u_new:"Доступна версия {v}.",u_unav:"Сведения об обновлениях пока недоступны. Возможно, релизы ещё закрыты.",u_err:"Не удалось проверить обновления. Попробуйте позже.",u_off:"Вы офлайн.",u_check:"Проверить обновления",u_get:"Скачать обновление",u_notes:"Что нового",u_repo:"Репозиторий",u_cred:"Создано на Tauri и hls.js. Исходный код доступен по лицензии PolyForm Noncommercial 1.0.0.",u_pill:"Доступно обновление"},
 en:{w_title:"Welcome",w_text:"Let’s set things up in a minute. Press “Start” to begin.",
 st_lang:"Language",st_lang_d:"Choose the interface language. You can change it later in Settings.",
 st_acc:"Accent color",st_acc_d:"This color highlights selected items and the background.",
@@ -306,7 +315,7 @@ do_up:"Create account",do_in:"Sign in",skip:"Continue as a guest",
 e_email:"Enter a valid email address, for example name@example.com.",
 e_user:"Username: 3 to 20 characters, letters, numbers, dots and underscores only.",
 e_pass:"Password must be at least 8 characters.",
-sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. It may be offline, blocked in your region or restricted by the provider. In the online preview, outside connections are always blocked.",c_play:"Play",c_pause:"Pause",c_live:"Live",c_fs:"Full screen",c_seek:"Rewind",c_vol:"Volume",c_lag:"Behind live",c_win:"rewind window",c_none:"Rewind is not available for this stream"}
+sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. It may be offline, blocked in your region or restricted by the provider. In the online preview, outside connections are always blocked.",c_play:"Play",c_pause:"Pause",c_live:"Live",c_fs:"Full screen",c_seek:"Rewind",c_vol:"Volume",c_lag:"Behind live",c_win:"rewind window",c_none:"Rewind is not available for this stream",nav_about:"About",about_d:"Version, updates and credits.",g_upd:"Check for updates on startup",u_ver:"Version",u_idle:"Press the button to check for updates.",u_chk:"Checking…",u_none:"You have the latest version.",u_new:"Version {v} is available.",u_unav:"Update information is not available yet. The releases may still be private.",u_err:"Could not check for updates. Try again later.",u_off:"You are offline.",u_check:"Check for updates",u_get:"Download update",u_notes:"What’s new",u_repo:"Repository",u_cred:"Built with Tauri and hls.js. Source code is available under the PolyForm Noncommercial License 1.0.0.",u_pill:"Update available"}
 };
 var ACC={
 purple:{a:"#8b5cf6",r:"139,92,246",l:"#c4b0ff",d:"#3b1b8f"},
@@ -318,9 +327,10 @@ var G={
 lang:{label:"g_lang",o:[["ru","Русский"],["en","English"]],raw:1},
 accent:{label:"g_accent",o:[["purple","a_purple"],["blue","a_blue"],["orange","a_orange"],["red","a_red"],["green","a_green"]],sw:1},
 size:{label:"g_size",o:[["16px","s1"],["18px","s2"],["22px","s3"]]},
+upd:{label:"g_upd",o:[["on","on"],["off","off"]]},
 bg:{label:"g_bg",o:[["on","on"],["off","off"]]},
 motion:{label:"g_motion",o:[["on","on"],["off","off"]]}};
-var P={lang:"en",accent:"purple",size:"18px",bg:"on",motion:"on"};
+var P={upd:"on",lang:"en",accent:"purple",size:"18px",bg:"on",motion:"on"};
 var page="home",cur=0,errKey="",msgKey="",mode="up",back2home=false,done=false,KEY="appshell:v1",U={signed:false,first:"",last:"",avatar:"",via:""};
 var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
 var stage=$("#stage"),views={welcome:$("#welcome"),setup:$("#setup"),home:$("#home")};
@@ -358,9 +368,10 @@ function renderText(){
   $("#err").textContent=errKey?t(errKey):"";
   renderProfile();
   renderHome();
+  renderAbout();
   $("#pTitle").textContent=t("nav_"+page);
-  $("#pDesc").textContent=page==="settings"?t("settings_d"):page==="profile"?t("prof_d"):t("home_d");
-  $("#pGrid").hidden=page!=="projects"&&page!=="files";$("#pHome").hidden=page!=="home";$("#pSettings").hidden=page!=="settings";$("#pProfile").hidden=page!=="profile";$("#pReset").hidden=page!=="settings";
+  $("#pDesc").textContent=page==="settings"?t("settings_d"):page==="profile"?t("prof_d"):page==="about"?t("about_d"):t("home_d");
+  $("#pGrid").hidden=page!=="projects"&&page!=="files";$("#pHome").hidden=page!=="home";$("#pAbout").hidden=page!=="about";$("#pSettings").hidden=page!=="settings";$("#pProfile").hidden=page!=="profile";$("#pReset").hidden=page!=="settings";
   var sz={"16px":"s1","18px":"s2","22px":"s3"}[P.size];
   $("#summary").innerHTML=
    "<div>"+t("sum_acct")+": <b>"+esc(dispName())+"</b></div>"+
@@ -398,7 +409,7 @@ $$(".nav").forEach(function(n){n.addEventListener("click",function(){
   n.setAttribute("aria-current","page");renderText();
 })});
 function placeInd(){var b=$('.nav[aria-current="page"]'),i=$("#ind");if(b&&i){i.style.height=b.offsetHeight+"px";i.style.transform="translateY("+b.offsetTop+"px)"}}
-function contentEls(){return [$("#pTitle"),$("#pDesc")].concat(page==="settings"?$$("#pSettings .sgroup"):page==="profile"?$$("#pProfile .pitem"):page==="home"?$$("#pHome .card"):$$("#pGrid .card"))}
+function contentEls(){return [$("#pTitle"),$("#pDesc")].concat(page==="settings"?$$("#pSettings .sgroup"):page==="profile"?$$("#pProfile .pitem"):page==="home"?$$("#pHome .card"):page==="about"?$$("#pAbout .card"):$$("#pGrid .card"))}
 function dropIn(l){l.forEach(function(e,i){e.classList.remove("drop");void e.offsetWidth;e.style.animationDelay=(i*70)+"ms";e.classList.add("drop")})}
 $$(".nav").forEach(function(n){n.addEventListener("click",function(){
   n.classList.remove("press");void n.offsetWidth;n.classList.add("press");
@@ -468,7 +479,7 @@ function load(){try{
   if(T[p.lang])P.lang=p.lang;
   if(ACC[p.accent])P.accent=p.accent;
   if(["16px","18px","22px"].indexOf(p.size)>-1)P.size=p.size;
-  if(p.bg==="on"||p.bg==="off")P.bg=p.bg;
+  if(p.bg==="on"||p.bg==="off")P.bg=p.bg;if(p.upd==="on"||p.upd==="off")P.upd=p.upd;
   if(p.motion==="on"||p.motion==="off")P.motion=p.motion;
   if(u.signed===true)U={signed:true,first:String(u.first||"").slice(0,40),last:String(u.last||"").slice(0,40),avatar:/^data:image\//.test(u.avatar||"")?u.avatar:"",via:String(u.via||"email").slice(0,20)};
   done=d.done===true;
@@ -549,6 +560,30 @@ $("#hAdd").addEventListener("click",function(){
 });
 $("#pBack").addEventListener("click",function(){stop();playing=null;renderHome()});
 $("#pRm").addEventListener("click",function(){CH=CH.filter(function(d){return key(d)!==playing});stop();playing=null;saveCh();renderHome()});
+/* Updates: reads the latest GitHub release and compares versions. APP_VERSION is set from src-tauri/tauri.conf.json during the build. */
+var APP_VERSION="0.1.0",UPD_REPO="SeniorWilcox/turbo",upd={s:"idle",v:"",notes:"",url:""};
+function vp(s){return String(s).replace(/^v/i,"").split("-")[0].split(".").map(function(x){return parseInt(x,10)||0})}
+function newer(a,b){var x=vp(a),y=vp(b);for(var i=0;i<3;i++){var p=x[i]||0,q=y[i]||0;if(p!==q)return p>q}return false}
+function openExt(u){if(!/^https:\/\/github\.com\//.test(u))return;var o=window.__TAURI__&&window.__TAURI__.opener;if(o&&o.openUrl)o.openUrl(u);else window.open(u,"_blank","noopener")}
+function checkUpd(){
+  if(!navigator.onLine){upd.s="offline";renderAbout();return}
+  upd.s="checking";renderAbout();
+  fetch("https://api.github.com/repos/"+UPD_REPO+"/releases/latest",{headers:{Accept:"application/vnd.github+json"}})
+  .then(function(r){if(r.status===404){upd.s="unavailable";throw 0}if(!r.ok)throw 0;return r.json()})
+  .then(function(j){var tag=String(j.tag_name||"");if(newer(tag,APP_VERSION))upd={s:"new",v:tag.replace(/^v/i,""),notes:String(j.body||"").slice(0,2000),url:String(j.html_url||"")};else upd.s="none"})
+  .catch(function(){if(upd.s==="checking")upd.s="error"})
+  .then(renderAbout)}
+function renderAbout(){
+  var s=upd.s,m={idle:"u_idle",checking:"u_chk",none:"u_none",unavailable:"u_unav",error:"u_err",offline:"u_off"}[s];
+  $("#uVer").textContent=t("u_ver")+" "+APP_VERSION;
+  $("#uStat").textContent=s==="new"?t("u_new").replace("{v}",upd.v):t(m);
+  $("#uNotes").textContent=s==="new"?upd.notes:"";$("#uNotesH").hidden=!(s==="new"&&upd.notes);
+  $("#uGet").hidden=s!=="new";$("#uCheck").disabled=s==="checking";
+  $("#aboutDot").hidden=s!=="new";var pb=$("#hUpdBtn");pb.hidden=s!=="new";pb.textContent=t("u_pill")+" "+upd.v}
+$("#uCheck").addEventListener("click",checkUpd);
+$("#uGet").addEventListener("click",function(){openExt(upd.url)});
+$("#uRepo").addEventListener("click",function(){openExt("https://github.com/"+UPD_REPO)});
+$("#hUpdBtn").addEventListener("click",function(){gotoPage("about")});
 var drag=false;
 function rng(){var s=$("#vid").seekable;if(!s||!s.length)return null;var a=s.start(0),b=s.end(s.length-1);return{a:a,b:b,w:b-a}}
 function ctl(){
@@ -573,7 +608,7 @@ $("#reset").addEventListener("click",function(){
   if(!b.getAttribute("data-c")){b.setAttribute("data-c","1");b.setAttribute("data-i","reset_c");renderText();rt=setTimeout(function(){b.removeAttribute("data-c");b.setAttribute("data-i","reset");renderText()},4000);return}
   clearTimeout(rt);b.removeAttribute("data-c");b.setAttribute("data-i","reset");
   try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+":ch")}catch(e){}CH=[];playing=null;pend=null;
-  P={lang:"en",accent:"purple",size:"18px",bg:"on",motion:"on"};
+  P={upd:"on",lang:"en",accent:"purple",size:"18px",bg:"on",motion:"on"};
   U={signed:false,first:"",last:"",avatar:"",via:""};done=false;cur=0;errKey="";msgKey="";back2home=false;
   ["#fEmail","#fUser","#fPass"].forEach(function(s){$(s).value=""});
   setMode("up");gotoPage("home");refresh();show("welcome");
@@ -582,6 +617,7 @@ load();
 if(done){Object.keys(views).forEach(function(k){views[k].classList.toggle("on",k==="home")});stage.setAttribute("data-v","home")}
 refresh();
 if(done){placeInd();setTimeout(function(){dropIn($$(".nav").concat(contentEls()))},200)}else $("#start").focus({preventScroll:true});
+if(P.upd==="on")setTimeout(checkUpd,3000);
 })();
 </script>
 </body>

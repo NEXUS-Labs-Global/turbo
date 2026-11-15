@@ -37,7 +37,7 @@ Channels are added with small `.turbotv` files (one channel each); several chann
 
 ## Desktop app
 
-A desktop app for Windows and Linux is built with Tauri; see [docs/building.md](docs/building.md) for the automatic build on GitHub.
+A desktop app for Windows and Linux is built with Tauri; see [docs/building.md](docs/building.md) for the automatic build on GitHub and [docs/releasing.md](docs/releasing.md) for publishing new versions that the app can find.
 
 ## Run it
 
@@ -58,6 +58,7 @@ To publish it as a website with GitHub Pages: **Settings → Pages → Deploy fr
 | Path | What it is |
 | --- | --- |
 | `index.html` | The whole prototype in one file |
+| `docs/releasing.md` | How to publish a release so the app offers the update |
 | `docs/turbotv-format.md` | Draft specification of the `.turbotv` channel format |
 | `examples/example-channel.turbotv` | Example channel file (fictional provider) |
 | `docs/creating-a-channel.md` | How to make your own `.turbotv` channel file |

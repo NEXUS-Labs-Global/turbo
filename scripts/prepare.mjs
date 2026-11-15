@@ -7,9 +7,15 @@ mkdirSync("src/vendor", { recursive: true });
 cpSync("node_modules/hls.js/dist/hls.min.js", "src/vendor/hls.min.js");
 
 const cdn = /https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/hls\.js\/[\d.]+\/hls\.min\.js/;
-const html = readFileSync("index.html", "utf8");
+const version = JSON.parse(readFileSync("src-tauri/tauri.conf.json", "utf8")).version;
+let html = readFileSync("index.html", "utf8");
 if (!cdn.test(html)) {
   throw new Error("hls.js script link not found in index.html");
 }
-writeFileSync("src/index.html", html.replace(cdn, "vendor/hls.min.js"));
+html = html.replace(cdn, "vendor/hls.min.js");
+if (!/APP_VERSION="[^"]*"/.test(html)) {
+  throw new Error("APP_VERSION not found in index.html");
+}
+html = html.replace(/APP_VERSION="[^"]*"/, `APP_VERSION="${version}"`);
+writeFileSync("src/index.html", html);
 console.log("src/ is ready");
