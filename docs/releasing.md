@@ -10,7 +10,7 @@ The app checks the latest **GitHub release** and tells the user when a newer ver
 4. In **Choose a tag** type a new tag that matches the version with a `v` in front (`v0.1.1`) and choose **Create new tag**.
 5. Write the release notes. The app shows them under **What's new**.
 6. Press **Publish release**.
-7. The workflow **Build installers** starts by itself and attaches the Windows and Linux installers to the release in about 10 minutes.
+7. The workflow **Build installers** starts by itself and attaches the installers, signatures and `latest.json` to the release. The Linux and Windows builds run one after another, so allow about 20 minutes. The update becomes available to the app only after both are done.
 
 ## Rules
 
@@ -19,6 +19,6 @@ The app checks the latest **GitHub release** and tells the user when a newer ver
 - The update check reads the public GitHub API. It works only when the repository (or the repository that holds the releases) is **public**. While the repository is private, the app shows that update information is not available.
 - `UPD_REPO` near the top of the update code in `index.html` names the repository that is checked.
 
-## What the update does today
+## What the update does
 
-The app only notices a new version and opens the release page, where the user downloads the installer. Installing updates inside the app needs signed update files (Tauri updater) and is planned as the next step.
+When signed updates are set up (see [updates-setup.md](updates-setup.md)), the app downloads the update, checks its signature, installs it and restarts. The workflow attaches the installers, the signature files and `latest.json` to the release. Without that setup the app only shows that a newer version exists and opens the release page.

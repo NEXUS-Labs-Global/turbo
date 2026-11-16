@@ -58,6 +58,7 @@ To publish it as a website with GitHub Pages: **Settings → Pages → Deploy fr
 | Path | What it is |
 | --- | --- |
 | `index.html` | The whole prototype in one file |
+| `docs/updates-setup.md` | One-time setup of signed in-app updates |
 | `docs/releasing.md` | How to publish a release so the app offers the update |
 | `docs/turbotv-format.md` | Draft specification of the `.turbotv` channel format |
 | `examples/example-channel.turbotv` | Example channel file (fictional provider) |
