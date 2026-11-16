@@ -12,6 +12,7 @@ jobs:
       contents: write
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         platform: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.platform }}
@@ -40,24 +41,16 @@ jobs:
       - name: Generate app icons
         run: npx tauri icon app-icon.png
 
-      - name: Build installers
-        run: npx tauri build
-
-      - name: Upload installers
-        uses: actions/upload-artifact@v4
+      # On a tag (for example v0.1.1) this attaches the installers, the signature files
+      # and latest.json to the GitHub release. On a manual run it only builds.
+      - uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
-          name: turbo-${{ matrix.platform }}
-          if-no-files-found: error
-          path: |
-            src-tauri/target/release/bundle/nsis/*.exe
-            src-tauri/target/release/bundle/deb/*.deb
-            src-tauri/target/release/bundle/appimage/*.AppImage
-
-      - name: Attach installers to the GitHub release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            src-tauri/target/release/bundle/nsis/*.exe
-            src-tauri/target/release/bundle/deb/*.deb
-            src-tauri/target/release/bundle/appimage/*.AppImage
+          tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
+          releaseName: "TURBO ${{ github.ref_name }}"
+          releaseDraft: false
+          prerelease: false
+          uploadWorkflowArtifacts: true
