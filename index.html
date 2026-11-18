@@ -561,7 +561,7 @@ $("#hAdd").addEventListener("click",function(){
 $("#pBack").addEventListener("click",function(){stop();playing=null;renderHome()});
 $("#pRm").addEventListener("click",function(){CH=CH.filter(function(d){return key(d)!==playing});stop();playing=null;saveCh();renderHome()});
 /* Updates: reads the latest GitHub release and compares versions. APP_VERSION is set from src-tauri/tauri.conf.json during the build. */
-var APP_VERSION="0.1.0",UPD_REPO="SeniorWilcox/turbo",upd={s:"idle",v:"",notes:"",url:""};
+var APP_VERSION="0.1.0",UPD_REPO="NEXUS-Labs-Global/turbo",upd={s:"idle",v:"",notes:"",url:""};
 function vp(s){return String(s).replace(/^v/i,"").split("-")[0].split(".").map(function(x){return parseInt(x,10)||0})}
 function newer(a,b){var x=vp(a),y=vp(b);for(var i=0;i<3;i++){var p=x[i]||0,q=y[i]||0;if(p!==q)return p>q}return false}
 function openExt(u){if(!/^https:\/\/github\.com\//.test(u))return;var o=window.__TAURI__&&window.__TAURI__.opener;if(o&&o.openUrl)o.openUrl(u);else window.open(u,"_blank","noopener")}
