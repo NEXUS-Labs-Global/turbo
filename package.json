@@ -7,7 +7,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "hls.js": "1.5.17"
+    "hls.js": "1.7.4"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2"
