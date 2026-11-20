@@ -37,6 +37,14 @@ This guide is for anyone who wants to add a TV channel to TURBO. You need a text
 | `license.regions` | Where watching is allowed, like `["CZ", "DE"]`, or `["*"]` if everywhere |
 | `license.note` | Optional. For example: "Official file" or "Made by a fan, not approved by the channel" |
 
+## Adding a logo
+
+- Add `"logo": { "url": "https://..." }` inside the `channel` block of your file. Remember the comma after the previous line.
+- Use a PNG or WebP image under 2 MiB, at least 128 pixels wide or tall, on a transparent or dark background.
+- The address must start with `https://` and must stay available.
+- The logo is loaded only after someone adds your channel. If it cannot be loaded, TURBO shows the first letter of the channel name.
+- Use only a logo you are allowed to use.
+
 ## Writing JSON without mistakes
 
 - Text goes in straight double quotes `"like this"`.
