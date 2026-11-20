@@ -2,7 +2,7 @@
   "format": "turbotv",
   "version": 0,
   "id": "my-channel",
-  "updated": "2026-11-14T00:00:00Z",
+  "updated": "2026-11-20T00:00:00Z",
   "provider": {
     "id": "my-provider",
     "name": "REPLACE: provider name",
@@ -14,7 +14,10 @@
     "country": "ZZ",
     "languages": ["en"],
     "category": "other",
-    "description": "REPLACE: one short sentence about the channel."
+    "description": "REPLACE: one short sentence about the channel.",
+    "logo": {
+      "url": "https://example.com/replace-with-the-channel-logo.png"
+    }
   },
   "source": {
     "type": "hls",
