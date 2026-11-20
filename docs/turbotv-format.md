@@ -67,7 +67,7 @@ The global identity of a channel is `provider.id` + `/` + `id`. Importing a file
 | `languages` | yes | 1 to 5 BCP 47 tags, for example `["en", "es-MX"]` |
 | `category` | yes | One of: `news`, `sports`, `movies`, `series`, `music`, `kids`, `documentary`, `culture`, `education`, `general`, `other` |
 | `description` | no | Up to 300 characters, plain text |
-| `logo` | no | Object with `url`: an `https` address of a PNG or WebP image, up to 2 MiB |
+| `logo` | no | Object with `url`: an `https` address of a PNG or WebP image, up to 2 MiB. A square or wide image of at least 128 pixels on a transparent or dark background works best. For the offline copy the image server should allow cross-origin use (CORS); without it the logo still shows, but only while online |
 
 ### `source`
 
@@ -91,7 +91,7 @@ The provider's statement about its rights.
 
 ### Unknown fields
 
-Readers ignore fields they do not know. Custom extension fields must start with `x-`.
+Readers ignore fields they do not know. Custom extension fields must start with `x-`. TURBO itself stores the offline logo copy in its own saved record under `x-logo`; providers must not set this field.
 
 ## 3. Reading rules
 
@@ -158,7 +158,7 @@ Rules:
 2. The app checks size and format (section 3). It does not contact the provider yet.
 3. The app shows a preview: provider, channel name, country, languages, category, the host of the stream, license information and whether the file is signed.
 4. For a pack, the user can tick which channels to add.
-5. Only after the user confirms, the app saves the channels and may load logos.
+5. Only after the user confirms, the app saves the channels and loads the logos. It shows the logo from `channel.logo.url` and may keep a small copy (at most 128 pixels) on the device, so the logo still appears without internet. If the logo cannot be loaded, the first letter of the channel name is shown instead.
 6. Nothing starts playing automatically.
 
 ## 7. Security summary
