@@ -140,6 +140,8 @@ body.calm .drop{animation:none}
 .chn span{color:var(--muted);font-size:.85em}
 .prev{max-width:560px;margin-bottom:18px}
 .prev div{padding:3px 0}
+.chl{display:flex;align-items:center;justify-content:center;flex:none;width:52px;height:52px;border-radius:10px;background:#16161b;border:1px solid var(--line);overflow:hidden;font-weight:800;font-size:1.3em;color:#fff}
+.chl img{width:100%;height:100%;object-fit:contain;padding:4px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);margin-left:8px;border:2px solid #fff;vertical-align:middle}
 #uNotes{white-space:pre-wrap;max-height:220px;overflow:auto;color:var(--muted);margin:6px 0 14px;font:inherit}
 button.pill{font:inherit;color:#fff;background:transparent;cursor:pointer;border-color:var(--accent)}
@@ -235,7 +237,7 @@ body.calm .step.on{animation:none}
           <p class="err" id="hMsg" role="alert"></p>
           <div class="card prev" id="hPrev" hidden><h3 data-i="prev_t"></h3><div id="hPrevBody"></div><div class="rowb" style="margin:14px 0 0"><button class="btn" id="hAdd" data-i="add"></button><button class="btn ghost" id="hCancel" data-i="cancel"></button></div></div>
           <div id="hList"><div class="card" id="hEmpty" style="margin-bottom:16px"><h3 data-i="empty_t"></h3><span data-i="empty_d"></span><div class="rowb" style="margin:14px 0 0"><button class="btn ghost" id="hEx" data-i="ex"></button></div></div><div class="grid" id="hGrid"></div></div>
-          <div id="hPlay" hidden><div class="rowb"><button class="btn ghost" id="pBack" data-i="back"></button><button class="btn ghost" id="pRm" data-i="rm"></button></div><h2 id="pTit"></h2><p id="pInfo"></p><div class="pl"><video id="vid" playsinline></video><div class="ctl"><button class="btn" id="cPlay"></button><input type="range" id="cSeek" min="0" max="1000" value="1000"><button class="btn ghost" id="cLive" data-i="c_live"></button><input type="range" id="cVol" min="0" max="1" step="0.05" value="1"><button class="btn ghost" id="cFs" data-i="c_fs"></button></div><div class="pill" id="cLag" style="margin-top:10px;display:inline-block"></div></div><p class="err" id="vStat"></p></div>
+          <div id="hPlay" hidden><div class="rowb"><button class="btn ghost" id="pBack" data-i="back"></button><button class="btn ghost" id="pRm" data-i="rm"></button></div><div class="rowb" style="align-items:center;margin-bottom:8px"><span id="pLogo"></span><h2 id="pTit" style="margin:0"></h2></div><p id="pInfo"></p><div class="pl"><video id="vid" playsinline></video><div class="ctl"><button class="btn" id="cPlay"></button><input type="range" id="cSeek" min="0" max="1000" value="1000"><button class="btn ghost" id="cLive" data-i="c_live"></button><input type="range" id="cVol" min="0" max="1" step="0.05" value="1"><button class="btn ghost" id="cFs" data-i="c_fs"></button></div><div class="pill" id="cLag" style="margin-top:10px;display:inline-block"></div></div><p class="err" id="vStat"></p></div>
         </div>
         <div id="pAbout" hidden>
           <div class="card" style="max-width:560px;margin-bottom:18px"><h3 id="uVer"></h3><p id="uStat" role="status" style="margin:0 0 12px"></p><h3 id="uNotesH" data-i="u_notes" hidden></h3><pre id="uNotes"></pre><div class="rowb" style="margin:0"><button class="btn" id="uCheck" data-i="u_check"></button><button class="btn" id="uGet" data-i="u_get" hidden></button></div></div>
@@ -507,6 +509,19 @@ function check(d){
   if(d.update_url!=null&&!https(d.update_url))return"update_url";
   return""}
 function key(d){return d.provider.id+"/"+d.id}
+var LOGO_OK=/^data:image\/(png|webp|jpeg);base64,[A-Za-z0-9+\/=]+$/,triedLogos={};
+/* Channel logo: a saved copy on the device if there is one, otherwise the provider's image address, otherwise the first letter. */
+function logoEl(d){
+  var s=el("span","chl",d.channel.name.charAt(0).toUpperCase()),c=d["x-logo"],u=d.channel.logo&&d.channel.logo.url;
+  function show(src,net){var i=new Image();i.alt="";i.referrerPolicy="no-referrer";i.onload=function(){s.textContent="";s.appendChild(i);if(net)cacheLogo(d)};i.src=src}
+  if(typeof c==="string"&&c.length<150000&&LOGO_OK.test(c))show(c,false);
+  else if(u&&navigator.onLine)show(u,true);
+  return s}
+function cacheLogo(d){
+  var k=key(d);if(d["x-logo"]||triedLogos[k])return;triedLogos[k]=1;
+  var p=new Image();p.crossOrigin="anonymous";p.referrerPolicy="no-referrer";
+  p.onload=function(){try{var f=Math.min(1,128/Math.max(p.naturalWidth,p.naturalHeight)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(p.naturalWidth*f));c.height=Math.max(1,Math.round(p.naturalHeight*f));c.getContext("2d").drawImage(p,0,0,c.width,c.height);var data=c.toDataURL("image/png");if(data.length<150000){d["x-logo"]=data;saveCh()}}catch(e){}};
+  p.src=d.channel.logo.url}
 function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
 function host(u){try{return new URL(u).host}catch(e){return u}}
 function saveCh(){try{localStorage.setItem(CKEY,JSON.stringify(CH))}catch(e){}}
@@ -536,12 +551,12 @@ function renderHome(){
   var g=$("#hGrid");g.innerHTML="";
   CH.forEach(function(d){
     var b=el("button","card chc"),w=el("span","chn");
-    b.appendChild(el("span","av",d.channel.name.charAt(0).toUpperCase()));
+    b.appendChild(logoEl(d));
     w.appendChild(el("b","",d.channel.name));
     w.appendChild(el("span","",d.channel.country+" \u00b7 "+d.channel.languages.join(" ")+" \u00b7 "+d.channel.category));
     w.appendChild(el("span","",d.provider.name));
     b.appendChild(w);b.onclick=function(){playing=key(d);renderHome();start(d)};g.appendChild(b)});
-  if(cur){$("#pTit").textContent=cur.channel.name;$("#pInfo").textContent=cur.provider.name+(cur.license.holder!==cur.provider.name?", "+cur.license.holder:"")}
+  if(cur){$("#pTit").textContent=cur.channel.name;var pl=$("#pLogo");pl.innerHTML="";pl.appendChild(logoEl(cur));$("#pInfo").textContent=cur.provider.name+(cur.license.holder!==cur.provider.name?", "+cur.license.holder:"")}
 }
 $("#hImp").addEventListener("click",function(){$("#hFile").click()});
 $("#hFile").addEventListener("change",function(){
