@@ -33,7 +33,7 @@ This repository contains an interface prototype only. There is no backend, so:
 
 ## Channel files
 
-Channels are added with small `.turbotv` files (one channel each); several channels can be shipped as a `.turbopack` archive. The draft format is described in [docs/turbotv-format.md](docs/turbotv-format.md), with an [example](examples/example-channel.turbotv). To add your own channel, copy the [template](examples/template.turbotv) and follow [docs/creating-a-channel.md](docs/creating-a-channel.md).
+Channels are added with small `.turbotv` files (one channel each); several channels can be shipped as a `.turbopack` archive. The draft format is described in [docs/turbotv-format.md](docs/turbotv-format.md), with an [example](examples/example-channel.turbotv). To add your own channel, copy the [template](template.turbotv) and follow [docs/creating-a-channel.md](docs/creating-a-channel.md).
 
 ## Desktop app
 
