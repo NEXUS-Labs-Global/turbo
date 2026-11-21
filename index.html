@@ -186,16 +186,16 @@ body.calm .step.on{animation:none}
         <div class="progress" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b></div>
         <div class="step on"><h2 data-i="st_acct"></h2><p data-i="st_acct_d"></p>
           <div class="seg" role="group"><button id="mUp" aria-pressed="true" data-i="m_up"></button><button id="mIn" aria-pressed="false" data-i="m_in"></button></div>
-          <div class="social">
+          <div class="social" hidden>
             <button class="sbtn" data-prov="Google"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span data-i="with_g"></span></button>
             <button class="sbtn" data-prov="Apple"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#000" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span data-i="with_a"></span></button>
             <button class="sbtn" data-prov="Microsoft"><svg viewBox="0 0 23 23" aria-hidden="true"><path fill="#f35325" d="M1 1h10v10H1z"/><path fill="#81bc06" d="M12 1h10v10H12z"/><path fill="#05a6f0" d="M1 12h10v10H1z"/><path fill="#ffba08" d="M12 12h10v10H12z"/></svg><span data-i="with_m"></span></button>
           </div>
-          <div class="or"><span data-i="or"></span></div>
+          <div class="or" hidden><span data-i="or"></span></div>
           <label class="fld"><span data-i="f_email"></span><input id="fEmail" type="email" autocomplete="email" inputmode="email"></label>
           <label class="fld" id="fUserWrap"><span data-i="f_user"></span><input id="fUser" type="text" autocomplete="username"></label>
           <div class="fld"><label for="fPass" data-i="f_pass"></label><div class="pw"><input id="fPass" type="password" autocomplete="new-password"><button type="button" id="pwT" data-i="show"></button></div></div>
-          <p class="err" id="err" role="alert"></p>
+          <p class="err ok" id="authOk" role="status" style="margin:0 0 8px"></p><p class="err" id="err" role="alert"></p>
           <button class="btn" id="doAuth" style="width:100%" data-i="do_up"></button>
           <div style="text-align:center"><button class="linkbtn" id="skip" data-i="skip"></button></div>
         </div>
@@ -293,8 +293,8 @@ or:"или",f_email:"Электронная почта",f_user:"Имя поль�
 do_up:"Создать аккаунт",do_in:"Войти",skip:"Продолжить как гость",
 e_email:"Введите корректный адрес почты, например name@example.com.",
 e_user:"Имя пользователя: от 3 до 20 символов, только буквы, цифры, точка и подчёркивание.",
-e_pass:"Пароль должен содержать не менее 8 символов.",
-sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. Возможно, она не работает, заблокирована в вашем регионе или ограничена поставщиком. В онлайн-просмотре внешние соединения заблокированы всегда.",c_play:"Играть",c_pause:"Пауза",c_live:"В эфир",c_fs:"На весь экран",c_seek:"Перемотка",c_vol:"Громкость",c_lag:"Отставание",c_win:"окно перемотки",c_none:"Для этого потока перемотка недоступна",nav_about:"О программе",about_d:"Версия, обновления и сведения о проекте.",g_upd:"Проверять обновления при запуске",u_ver:"Версия",u_idle:"Нажмите кнопку, чтобы проверить обновления.",u_chk:"Проверяю…",u_none:"У вас последняя версия.",u_new:"Доступна версия {v}.",u_unav:"Сведения об обновлениях пока недоступны. Возможно, релизы ещё закрыты.",u_err:"Не удалось проверить обновления. Попробуйте позже.",u_off:"Вы офлайн.",u_check:"Проверить обновления",u_get:"Скачать обновление",u_notes:"Что нового",u_repo:"Репозиторий",u_cred:"Создано на Tauri и hls.js. Исходный код доступен по лицензии PolyForm Noncommercial 1.0.0.",u_pill:"Доступно обновление",u_install:"Установить обновление",u_inst:"Загрузка и установка… {p}%",u_done:"Обновление установлено. Приложение перезапускается.",soon_b:"Скоро",soon_go:"На главную",store_s:"Каналы от доверенных поставщиков.",store_t:"Магазин скоро появится",store_d:"Здесь появятся каналы от популярных и доверенных поставщиков. А пока добавляйте каналы файлами .turbotv на главной странице.",dl_s:"Смотрите сохранённые передачи без интернета.",dl_t:"Загрузки скоро появятся",dl_d:"Вы сможете сохранять передачи ваших каналов и смотреть их без интернета. Пока этот раздел недоступен."},
+e_pass:"Пароль должен содержать не менее 10 символов.",
+sum_acct:"Аккаунт",guest:"Гость",nav_profile:"Профиль",prof_d:"Настройте, как вы отображаетесь в приложении.",p_via:"Вход через",p_via_email:"Вход по почте",p_notin:"Вход не выполнен",p_note:"Гости не могут менять имя и фото. Войдите или создайте аккаунт, чтобы открыть эту возможность.",p_signin:"Войти или создать аккаунт",p_out:"Выйти",p_change:"Сменить фото",p_remove:"Удалить фото",p_first:"Имя",p_last:"Фамилия",p_save:"Сохранить",p_saved:"Сохранено.",e_name:"Введите имя.",reset:"Сбросить данные и показать приветствие",reset_c:"Нажмите ещё раз для подтверждения",imp:"Импортировать канал",on_l:"Онлайн",off_l:"Офлайн",empty_t:"Каналов пока нет",empty_d:"Импортируйте файл .turbotv, чтобы добавить первый канал.",ex:"Попробовать пример канала",prev_t:"Добавить этот канал?",add:"Добавить",cancel:"Отмена",rm:"Удалить канал",l_prov:"Поставщик",l_chan:"Канал",l_src:"Трансляция",l_lic:"Лицензия",l_sig:"Подпись",unv:"Не проверена",e_pack:"Паки (.turbopack) в этой версии пока не поддерживаются.",e_size:"Файл больше 64 КиБ.",e_json:"Файл не является корректным JSON.",e_bad:"Это не корректный файл .turbotv",v_off:"Вы офлайн. Прямым эфирам нужен интернет.",v_err:"Не удалось загрузить трансляцию. Возможно, она не работает, заблокирована в вашем регионе или ограничена поставщиком. В онлайн-просмотре внешние соединения заблокированы всегда.",c_play:"Играть",c_pause:"Пауза",c_live:"В эфир",c_fs:"На весь экран",c_seek:"Перемотка",c_vol:"Громкость",c_lag:"Отставание",c_win:"окно перемотки",c_none:"Для этого потока перемотка недоступна",nav_about:"О программе",about_d:"Версия, обновления и сведения о проекте.",g_upd:"Проверять обновления при запуске",u_ver:"Версия",u_idle:"Нажмите кнопку, чтобы проверить обновления.",u_chk:"Проверяю…",u_none:"У вас последняя версия.",u_new:"Доступна версия {v}.",u_unav:"Сведения об обновлениях пока недоступны. Возможно, релизы ещё закрыты.",u_err:"Не удалось проверить обновления. Попробуйте позже.",u_off:"Вы офлайн.",u_check:"Проверить обновления",u_get:"Скачать обновление",u_notes:"Что нового",u_repo:"Репозиторий",u_cred:"Создано на Tauri и hls.js. Исходный код доступен по лицензии PolyForm Noncommercial 1.0.0.",u_pill:"Доступно обновление",u_install:"Установить обновление",u_inst:"Загрузка и установка… {p}%",u_done:"Обновление установлено. Приложение перезапускается.",soon_b:"Скоро",soon_go:"На главную",store_s:"Каналы от доверенных поставщиков.",store_t:"Магазин скоро появится",store_d:"Здесь появятся каналы от популярных и доверенных поставщиков. А пока добавляйте каналы файлами .turbotv на главной странице.",dl_s:"Смотрите сохранённые передачи без интернета.",dl_t:"Загрузки скоро появятся",dl_d:"Вы сможете сохранять передачи ваших каналов и смотреть их без интернета. Пока этот раздел недоступен.",a_conf:"Мы отправили ссылку для подтверждения на {e}. Откройте её и войдите.",e_cred:"Неверная почта или пароль.",e_unconf:"Сначала подтвердите почту: откройте ссылку из письма.",e_net:"Не удалось связаться с сервером. Проверьте соединение.",e_rate:"Слишком много попыток. Подождите несколько минут.",e_srv:"Что-то пошло не так. Попробуйте позже.",e_weak:"Пароль слишком слабый. Нужно не менее 10 символов.",sync_ing:"синхронизация…",sync_ok:"синхронизировано",sync_off:"офлайн, синхронизация позже",sync_err:"ошибка синхронизации"},
 en:{w_title:"Welcome",w_text:"Let’s set things up in a minute. Press “Start” to begin.",
 st_lang:"Language",st_lang_d:"Choose the interface language. You can change it later in Settings.",
 st_acc:"Accent color",st_acc_d:"This color highlights selected items and the background.",
@@ -316,8 +316,8 @@ or:"or",f_email:"Email",f_user:"Username",f_pass:"Password",show:"Show",hide:"Hi
 do_up:"Create account",do_in:"Sign in",skip:"Continue as a guest",
 e_email:"Enter a valid email address, for example name@example.com.",
 e_user:"Username: 3 to 20 characters, letters, numbers, dots and underscores only.",
-e_pass:"Password must be at least 8 characters.",
-sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. It may be offline, blocked in your region or restricted by the provider. In the online preview, outside connections are always blocked.",c_play:"Play",c_pause:"Pause",c_live:"Live",c_fs:"Full screen",c_seek:"Rewind",c_vol:"Volume",c_lag:"Behind live",c_win:"rewind window",c_none:"Rewind is not available for this stream",nav_about:"About",about_d:"Version, updates and credits.",g_upd:"Check for updates on startup",u_ver:"Version",u_idle:"Press the button to check for updates.",u_chk:"Checking…",u_none:"You have the latest version.",u_new:"Version {v} is available.",u_unav:"Update information is not available yet. The releases may still be private.",u_err:"Could not check for updates. Try again later.",u_off:"You are offline.",u_check:"Check for updates",u_get:"Download update",u_notes:"What’s new",u_repo:"Repository",u_cred:"Built with Tauri and hls.js. Source code is available under the PolyForm Noncommercial License 1.0.0.",u_pill:"Update available",u_install:"Install update",u_inst:"Downloading and installing… {p}%",u_done:"Update installed. The app is restarting.",soon_b:"Coming soon",soon_go:"Go to Home",store_s:"Channels from trusted providers.",store_t:"The store is coming soon",store_d:"Here you will find channels from popular and trusted providers. Until then, add channels with .turbotv files on the Home page.",dl_s:"Watch your saved programs without internet.",dl_t:"Downloads are coming soon",dl_d:"You will be able to save programs from your channels and watch them without internet. This section is not available yet."}
+e_pass:"Password must be at least 10 characters.",
+sum_acct:"Account",guest:"Guest",nav_profile:"Profile",prof_d:"Manage how you appear in the app.",p_via:"Signed in with",p_via_email:"Signed in with email",p_notin:"Not signed in",p_note:"Guests can’t change their name or photo. Sign in or create an account to unlock this.",p_signin:"Sign in or create an account",p_out:"Sign out",p_change:"Change photo",p_remove:"Remove photo",p_first:"First name",p_last:"Last name",p_save:"Save",p_saved:"Saved.",e_name:"Enter your first name.",reset:"Reset data and show welcome screen",reset_c:"Press again to confirm",imp:"Import channel",on_l:"Online",off_l:"Offline",empty_t:"No channels yet",empty_d:"Import a .turbotv file to add your first channel.",ex:"Try the example channel",prev_t:"Add this channel?",add:"Add",cancel:"Cancel",rm:"Remove channel",l_prov:"Provider",l_chan:"Channel",l_src:"Stream",l_lic:"License",l_sig:"Signature",unv:"Unverified",e_pack:"Packs (.turbopack) are not supported in this preview yet.",e_size:"The file is larger than 64 KiB.",e_json:"The file is not valid JSON.",e_bad:"Not a valid .turbotv file",v_off:"You are offline. Live channels need internet.",v_err:"The stream could not be loaded. It may be offline, blocked in your region or restricted by the provider. In the online preview, outside connections are always blocked.",c_play:"Play",c_pause:"Pause",c_live:"Live",c_fs:"Full screen",c_seek:"Rewind",c_vol:"Volume",c_lag:"Behind live",c_win:"rewind window",c_none:"Rewind is not available for this stream",nav_about:"About",about_d:"Version, updates and credits.",g_upd:"Check for updates on startup",u_ver:"Version",u_idle:"Press the button to check for updates.",u_chk:"Checking…",u_none:"You have the latest version.",u_new:"Version {v} is available.",u_unav:"Update information is not available yet. The releases may still be private.",u_err:"Could not check for updates. Try again later.",u_off:"You are offline.",u_check:"Check for updates",u_get:"Download update",u_notes:"What’s new",u_repo:"Repository",u_cred:"Built with Tauri and hls.js. Source code is available under the PolyForm Noncommercial License 1.0.0.",u_pill:"Update available",u_install:"Install update",u_inst:"Downloading and installing… {p}%",u_done:"Update installed. The app is restarting.",soon_b:"Coming soon",soon_go:"Go to Home",store_s:"Channels from trusted providers.",store_t:"The store is coming soon",store_d:"Here you will find channels from popular and trusted providers. Until then, add channels with .turbotv files on the Home page.",dl_s:"Watch your saved programs without internet.",dl_t:"Downloads are coming soon",dl_d:"You will be able to save programs from your channels and watch them without internet. This section is not available yet.",a_conf:"We sent a confirmation link to {e}. Open it, then sign in.",e_cred:"Wrong email or password.",e_unconf:"Confirm your email first: open the link we sent you.",e_net:"Could not reach the server. Check your connection.",e_rate:"Too many attempts. Please wait a few minutes.",e_srv:"Something went wrong. Try again later.",e_weak:"The password is too weak. Use at least 10 characters.",sync_ing:"syncing…",sync_ok:"synced",sync_off:"offline, will sync later",sync_err:"sync failed"}
 };
 var ACC={
 purple:{a:"#8b5cf6",r:"139,92,246",l:"#c4b0ff",d:"#3b1b8f"},
@@ -367,7 +367,7 @@ function applyPrefs(){
 function renderText(){
   $$("[data-i]").forEach(function(e){e.textContent=t(e.getAttribute("data-i"))});
   next.textContent=cur===steps.length-1?t("open"):t("next");
-  $("#err").textContent=errKey?t(errKey):"";
+  $("#err").textContent=errKey?t(errKey):"";$("#authOk").textContent=okEm?t("a_conf").replace("{e}",okEm):"";
   renderProfile();
   renderHome();
   renderAbout();
@@ -431,8 +431,10 @@ $("#doAuth").addEventListener("click",function(){
   var em=$("#fEmail").value.trim(),us=$("#fUser").value.trim(),pw=$("#fPass").value;
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))return fail("e_email","#fEmail");
   if(mode==="up"&&!/^[A-Za-z0-9_.]{3,20}$/.test(us))return fail("e_user","#fUser");
-  if(pw.length<8)return fail("e_pass","#fPass");
-  $("#fPass").value="";signIn(mode==="up"?us:em.split("@")[0],"","email");
+  if(pw.length<10)return fail("e_pass","#fPass");
+  var btn=$("#doAuth");btn.disabled=true;errKey="";okEm="";
+  var run=mode==="up"?signUp(em,pw,us).then(function(){$("#fPass").value="";setMode("in");okEm=em;renderText()}):signInPw(em,pw).then(function(j){setSess(j);$("#fPass").value="";U={signed:true,first:"",last:"",avatar:"",via:"email",email:S.email};return fullSync().then(afterAuth)});
+  run.catch(function(e){fail(typeof e==="string"?e:"e_net","#fEmail")}).then(function(){btn.disabled=false});
 });
 $$("#fEmail,#fUser,#fPass").forEach(function(i){i.addEventListener("keydown",function(e){if(e.key==="Enter")$("#doAuth").click()})});
 /* Demo profiles. Replace with the real OAuth profile (given_name / family_name) once the backend is connected. */
@@ -446,7 +448,7 @@ function renderProfile(){
   $("#nameS").textContent=n;
   $("#profBtn").setAttribute("aria-label",t("nav_profile")+": "+n);
   $("#pName").textContent=n;
-  $("#pMeta").textContent=U.signed?(U.via==="email"?t("p_via_email"):t("p_via")+" "+U.via):t("p_notin");
+  $("#pMeta").textContent=(U.signed?(U.via==="email"?t("p_via_email"):t("p_via")+" "+U.via):t("p_notin"))+(S&&syncSt?" · "+t("sync_"+syncSt):"");
   $("#pNote").hidden=U.signed;$("#pAuthBtn").hidden=U.signed;$("#pOut").hidden=!U.signed;
   ["#pFirst","#pLast","#pSave","#avUp"].forEach(function(s){$(s).disabled=!U.signed});
   $("#avRm").disabled=!(U.signed&&U.avatar);
@@ -457,7 +459,9 @@ function gotoPage(p){page=p;$$(".nav").forEach(function(x){if(x.getAttribute("da
 function afterAuth(){if(back2home){back2home=false;gotoPage("profile");show("home")}else goStep(1)}
 function signIn(first,last,via){U={signed:true,first:first,last:last,avatar:"",via:via};errKey="";afterAuth()}
 $("#pAuthBtn").addEventListener("click",function(){back2home=true;cur=0;refresh();show("setup")});
-$("#pOut").addEventListener("click",function(){U={signed:false,first:"",last:"",avatar:"",via:""};syncProfile()});
+$("#pOut").addEventListener("click",function(){
+  if(S)sbFetch("/auth/v1/logout",{method:"POST"},S.at).catch(function(){});
+  S=null;saveSess();CH=[];DEL=[];saveDel();saveCh();playing=null;U=guestU();syncSt="";syncProfile();renderHome()});
 $("#avUp").addEventListener("click",function(){if(U.signed)$("#avFile").click()});
 $("#avRm").addEventListener("click",function(){if(U.signed){U.avatar="";renderProfile()}});
 $("#avFile").addEventListener("change",function(){
@@ -472,7 +476,7 @@ $("#pSave").addEventListener("click",function(){
   if(!U.signed)return;
   var f=$("#pFirst").value.trim(),l=$("#pLast").value.trim();
   if(!f){msgKey="e_name";renderProfile();$("#pFirst").focus();return}
-  U.first=f;U.last=l;msgKey="p_saved";renderProfile();
+  U.first=f;U.last=l;msgKey="p_saved";U.dirty=true;renderProfile();schedSync();
 });
 /* Saved in this browser only. The password is never stored. */
 function save(){try{localStorage.setItem(KEY,JSON.stringify({P:P,U:U,done:done}))}catch(e){}}
@@ -484,7 +488,7 @@ function load(){try{
   if(["16px","18px","22px"].indexOf(p.size)>-1)P.size=p.size;
   if(p.bg==="on"||p.bg==="off")P.bg=p.bg;if(p.upd==="on"||p.upd==="off")P.upd=p.upd;
   if(p.motion==="on"||p.motion==="off")P.motion=p.motion;
-  if(u.signed===true)U={signed:true,first:String(u.first||"").slice(0,40),last:String(u.last||"").slice(0,40),avatar:/^data:image\//.test(u.avatar||"")?u.avatar:"",via:String(u.via||"email").slice(0,20)};
+  if(u.signed===true)U={signed:true,first:String(u.first||"").slice(0,40),last:String(u.last||"").slice(0,40),avatar:/^data:image\//.test(u.avatar||"")?u.avatar:"",via:String(u.via||"email").slice(0,20),dirty:u.dirty===true};
   done=d.done===true;
 }catch(e){}}
 /* Channels (.turbotv v0, see docs/turbotv-format.md) */
@@ -569,13 +573,13 @@ $("#hFile").addEventListener("change",function(){
 $("#hEx").addEventListener("click",function(){offer(JSON.stringify(EX))});
 $("#hCancel").addEventListener("click",function(){pend=null;renderHome()});
 $("#hAdd").addEventListener("click",function(){
-  if(!pend)return;
+  if(!pend)return;pend["x-at"]=Date.now();if(S){DEL=DEL.filter(function(k){return k!==key(pend)});saveDel()}
   var i=-1;CH.forEach(function(d,n){if(key(d)===key(pend))i=n});
   if(i<0)CH.push(pend);else if(Date.parse(pend.updated)>=Date.parse(CH[i].updated))CH[i]=pend;
-  pend=null;saveCh();renderHome();
+  pend=null;saveCh();renderHome();schedSync();
 });
 $("#pBack").addEventListener("click",function(){stop();playing=null;renderHome()});
-$("#pRm").addEventListener("click",function(){CH=CH.filter(function(d){return key(d)!==playing});stop();playing=null;saveCh();renderHome()});
+$("#pRm").addEventListener("click",function(){if(S){DEL.push(playing);saveDel()}CH=CH.filter(function(d){return key(d)!==playing});stop();playing=null;saveCh();renderHome();schedSync()});
 /* Updates: reads the latest GitHub release and compares versions. APP_VERSION is set from src-tauri/tauri.conf.json during the build. */
 var APP_VERSION="0.1.0",UPD_REPO="NEXUS-Labs-Global/turbo",upd={s:"idle",v:"",notes:"",url:""};
 function vp(s){return String(s).replace(/^v/i,"").split("-")[0].split(".").map(function(x){return parseInt(x,10)||0})}
@@ -614,6 +618,49 @@ function renderSoon(){
   $("#soonT").textContent=t(st?"store_t":"dl_t");$("#soonD").textContent=t(st?"store_d":"dl_d");
   $("#soonI").innerHTML='<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(st?'M5 8h14l-1.2 12H6.2L5 8zM9 11V7a3 3 0 0 1 6 0v4':'M12 3v12m0 0-5-5m5 5 5-5M4 20h16')+'"/></svg>'}
 $("#soonGo").addEventListener("click",function(){gotoPage("home")});
+/* Accounts (Supabase): email and password. The session is kept on this device; the profile name and the channels are synced. */
+var SB_URL="https://jhjtkwtpvdeoufqwzylf.supabase.co",SB_KEY="sb_publishable_PUK8ZWoG9mnokreYz07ezg_cJt_ueAo",SKEY=KEY+":sess",S=null,DEL=[],okEm="",syncSt="",syncing=false,syncT=0;
+function guestU(){return{signed:false,first:"",last:"",avatar:"",via:""}}
+function loadSess(){try{S=JSON.parse(localStorage.getItem(SKEY)||"null")}catch(e){S=null}}
+function saveSess(){try{if(S)localStorage.setItem(SKEY,JSON.stringify(S));else localStorage.removeItem(SKEY)}catch(e){}}
+function saveDel(){try{localStorage.setItem(KEY+":del",JSON.stringify(DEL))}catch(e){}}
+function sbFetch(path,opt,tok){opt=opt||{};var h=opt.headers||{};h.apikey=SB_KEY;h.Authorization="Bearer "+(tok||SB_KEY);if(opt.body&&!h["Content-Type"])h["Content-Type"]="application/json";opt.headers=h;return fetch(SB_URL+path,opt)}
+function setSess(j){var m=j.user.user_metadata||{};S={at:j.access_token,rt:j.refresh_token,exp:Date.now()+(j.expires_in||3600)*1000,uid:j.user.id,email:j.user.email,name:String(m.username||"")};saveSess()}
+function getTok(){
+  if(!S)return Promise.reject(401);
+  if(S.exp-Date.now()>60000)return Promise.resolve(S.at);
+  return sbFetch("/auth/v1/token?grant_type=refresh_token",{method:"POST",body:JSON.stringify({refresh_token:S.rt})}).then(function(r){if(!r.ok)throw 401;return r.json()}).then(function(j){j.user=j.user||{id:S.uid,email:S.email,user_metadata:{username:S.name}};setSess(j);return S.at})}
+function api(path,opt){return getTok().then(function(tk){return sbFetch("/rest/v1"+path,opt,tk)}).then(function(r){if(r.status===401)throw 401;if(!r.ok)throw r.status;return r.status===204?null:r.json().catch(function(){return null})})}
+function authErr(r,j){var m=String((j&&(j.msg||j.message||j.error_description))||"").toLowerCase();if(r.status===429)return"e_rate";if(m.indexOf("not confirmed")>-1)return"e_unconf";if(m.indexOf("invalid login")>-1)return"e_cred";if(m.indexOf("password")>-1)return"e_weak";return"e_srv"}
+function authCall(path,body){return sbFetch(path,{method:"POST",body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw authErr(r,j);return j})})}
+function signUp(em,pw,us){return authCall("/auth/v1/signup",{email:em,password:pw,data:{username:us}})}
+function signInPw(em,pw){return authCall("/auth/v1/token?grant_type=password",{email:em,password:pw})}
+function strip(d){var c=JSON.parse(JSON.stringify(d));delete c["x-logo"];delete c["x-at"];return c}
+function schedSync(){clearTimeout(syncT);syncT=setTimeout(fullSync,1500)}
+function fullSync(){
+  if(!S||syncing||!navigator.onLine)return Promise.resolve();
+  syncing=true;syncSt="ing";renderProfile();
+  var dn0=S.email.split("@")[0].slice(0,40),patch=function(n){return api("/profiles?id=eq."+S.uid,{method:"PATCH",headers:{Prefer:"return=minimal"},body:JSON.stringify({display_name:n})}).then(function(){return n})};
+  return api("/profiles?id=eq."+S.uid+"&select=display_name").then(function(p){
+    var dn=(p&&p[0]&&p[0].display_name)||"";
+    if(U.dirty){U.dirty=false;return patch((U.first+" "+U.last).trim())}
+    if(S.name&&dn===dn0)return patch(S.name);
+    return dn})
+  .then(function(dn){var i=dn.indexOf(" ");U.first=i<0?dn:dn.slice(0,i);U.last=i<0?"":dn.slice(i+1)})
+  .then(function(){return api("/channels?select=channel_key,data,deleted,updated_at")})
+  .then(function(rows){
+    var srv={},keep=[],push=[];(rows||[]).forEach(function(r){srv[r.channel_key]=r});
+    DEL.forEach(function(k){push.push({user_id:S.uid,channel_key:k,data:{},deleted:true});delete srv[k]});
+    CH.forEach(function(d){var k=key(d);if(DEL.indexOf(k)>-1)return;var r=srv[k],at=d["x-at"]||0;delete srv[k];
+      if(!r||at>Date.parse(r.updated_at)){push.push({user_id:S.uid,channel_key:k,data:strip(d),deleted:false});keep.push(d)}
+      else if(!r.deleted&&!check(r.data)){var n=r.data;n["x-at"]=Date.parse(r.updated_at);n["x-logo"]=d["x-logo"];keep.push(n)}});
+    Object.keys(srv).forEach(function(k){var r=srv[k];if(!r.deleted&&!check(r.data)){r.data["x-at"]=Date.parse(r.updated_at);keep.push(r.data)}});
+    CH=keep;DEL=[];saveDel();saveCh();
+    return push.length?api("/channels?on_conflict=user_id,channel_key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:JSON.stringify(push)}):null})
+  .then(function(){syncSt="ok"})
+  .catch(function(e){syncSt=navigator.onLine?"err":"off";if(e===401){S=null;saveSess();U=guestU()}})
+  .then(function(){syncing=false;save();renderHome();renderProfile()})}
+window.addEventListener("online",function(){if(S)schedSync()});
 var drag=false;
 function rng(){var s=$("#vid").seekable;if(!s||!s.length)return null;var a=s.start(0),b=s.end(s.length-1);return{a:a,b:b,w:b-a}}
 function ctl(){
@@ -644,10 +691,12 @@ $("#reset").addEventListener("click",function(){
   setMode("up");gotoPage("home");refresh();show("welcome");
 });
 load();
+loadSess();try{DEL=JSON.parse(localStorage.getItem(KEY+":del")||"[]")}catch(e){DEL=[]}if(!S&&U.signed)U=guestU();if(S)U.email=S.email;
 if(done){Object.keys(views).forEach(function(k){views[k].classList.toggle("on",k==="home")});stage.setAttribute("data-v","home")}
 refresh();
 if(done){placeInd();setTimeout(function(){dropIn($$(".nav").concat(contentEls()))},200)}else $("#start").focus({preventScroll:true});
 if(P.upd==="on")setTimeout(checkUpd,3000);
+if(S)setTimeout(fullSync,1500);setInterval(function(){if(S)fullSync()},300000);
 })();
 </script>
 </body>
